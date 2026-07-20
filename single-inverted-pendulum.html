@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Single Inverted Pendulum · Takeru Endo</title>
+  <meta name="description" content="A cart-pole single inverted pendulum: Lagrangian modeling, PD control design, a Python simulation, Fusion 360 CAD and 3D printing, KiCad electronics, and a 200 Hz Arduino control loop.">
+
+  <!-- Font: Inter (SF Pro substitute on non-Apple devices; system SF used on Apple) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== Navigation ===================== -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="nav-link" href="index.html" aria-current="page">
+      <span class="label">Projects<span class="underline"></span></span>
+    </a>
+    <a class="nav-link" href="about.html">
+      <span class="label">About<span class="underline"></span></span>
+    </a>
+  </nav>
+
+  <main class="container">
+
+    <a class="back-link reveal on-load" href="index.html" style="--delay: 0s">← Projects</a>
+
+    <!-- ===================== Detail hero ===================== -->
+    <header class="detail-hero reveal on-load" style="--delay: 0.08s">
+      <span class="eyebrow">Personal / Summer 2026</span>
+      <h1>Single Inverted Pendulum</h1>
+      <p class="lead">A cart-pole rig that balances a rod upright by sliding a belt-driven cart beneath it. A solo, end-to-end control-systems build: I derived the dynamics, tuned the controller in simulation, then ran it in real time on 3D-printed hardware.</p>
+      <p class="lead-sub">The full stack: <strong>Lagrangian modeling, PD control design, a Python simulation, Fusion 360 CAD and 3D printing, KiCad electronics, and a 200 Hz Arduino loop.</strong></p>
+    </header>
+
+    <!-- ===================== Snapshot ===================== -->
+    <section class="snapshot reveal on-load" style="--delay: 0.12s" aria-label="Project snapshot">
+      <p class="role"><strong>My role:</strong> Solo project. I derived the equations of motion, designed and tuned the PD controller in a Python simulation, modeled the CAD and 3D-printed the rig, wired the electronics in KiCad, and wrote the real-time Arduino controller.</p>
+      <div class="snapshot-stats">
+        <div class="stat"><span class="num">±0.5° in 0.7 s</span><span class="lbl">Settles to upright (hardware)</span></div>
+        <div class="stat"><span class="num">200 Hz</span><span class="lbl">Fixed-rate real-time control loop</span></div>
+        <div class="stat"><span class="num">+7.19 rad/s</span><span class="lbl">Open-loop unstable pole, stabilized by PD</span></div>
+        <div class="stat"><span class="num">±7°</span><span class="lbl">Recoverable starting tilt on hardware</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== Hero video (demo, silent) ===================== -->
+    <figure class="video-embed reveal on-load" style="--delay: 0.16s">
+      <video src="assets/pendulum/demo.mp4" poster="assets/pendulum/demo-poster.jpg" controls muted playsinline preload="metadata" aria-label="Demo video of the single inverted pendulum balancing"></video>
+      <figcaption>Demo: the built rig balancing the pendulum upright on its T-slot rail.</figcaption>
+    </figure>
+
+    <!-- ===================== Content ===================== -->
+    <section class="season reveal on-scroll">
+      <div class="season-head">
+        <h2>Balancing an unstable plant <span class="szn-year">· cart-pole</span></h2>
+        <span class="robot-name">Solo build</span>
+      </div>
+
+      <div class="game-intro">
+        <p><strong>The problem:</strong> an inverted pendulum is open-loop unstable, it falls the instant it leaves vertical. The actuator only moves the <strong>cart</strong>, never the rod directly. Balancing means sliding the cart under the falling rod fast enough to keep it upright, while also keeping the cart from running off its <strong>0.54 m</strong> rail.</p>
+      </div>
+
+      <h3>System modeling</h3>
+      <p>I modeled the cart-pole as a nonlinear, coupled system using <strong>Lagrange's method</strong>, treating the rod as a distributed mass rather than a point mass at the tip. Linearizing about the upright equilibrium with the small-angle approximation collapses the dynamics into a clean state-space form.</p>
+      <div class="equation" aria-label="Linearized equations of motion">
+        <div class="eq"><span class="lhs">x&Prime; =</span><span>(C/&Delta;)&middot;F(t) &minus; (B<sup>2</sup>g/&Delta;)&middot;&theta;</span><span class="num">(4)</span></div>
+        <div class="eq"><span class="lhs">&theta;&Prime; =</span><span>&minus;(B/&Delta;)&middot;F(t) + (ABg/&Delta;)&middot;&theta;</span><span class="num">(5)</span></div>
+        <p class="note">with <var>A</var> = M + m<sub>1</sub> + m<sub>2</sub>, <var>B</var> = l(m<sub>1</sub> + m<sub>2</sub>/2), <var>C</var> = l<sup>2</sup>(m<sub>1</sub> + m<sub>2</sub>/3), <var>&Delta;</var> = AC &minus; B<sup>2</sup>. The open-loop poles work out to {0, 0, +7.19, &minus;7.19} rad/s.</p>
+      </div>
+      <p>That single right-half-plane pole at <strong>+7.19 rad/s</strong> is the whole challenge: it confirms the plant is unstable and has to be actively stabilized.</p>
+      <figure class="robot-hero">
+        <a href="assets/pendulum/fig1-pole-zero.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/pendulum/fig1-pole-zero.png" alt="Open-loop pole-zero map showing a double pole at the origin, a stable pole at minus 7.19 rad/s, and an unstable pole at plus 7.19 rad/s in the right-half plane">
+        </a>
+        <figcaption>Open-loop pole-zero map. The pole in the shaded right-half plane makes the plant unstable. Click to open full size.</figcaption>
+      </figure>
+
+      <h3>Control design</h3>
+      <p>Two <strong>PD loops</strong> run on one actuator command. The angle loop drives the rod to upright and takes priority; a deliberately weaker position loop gently pulls the cart back to center so it never runs out of rail.</p>
+      <div class="equation" aria-label="PD control law">
+        <div class="eq"><span class="lhs">u(t) =</span><span>( K<sub>p,&theta;</sub>&middot;&theta; + K<sub>d,&theta;</sub>&middot;&theta;&prime; ) + ( K<sub>p,x</sub>&middot;x + K<sub>d,x</sub>&middot;x&prime; )</span><span class="num">(7)</span></div>
+        <p class="note">Angle loop (upright) summed with position loop (re-center) into a single cart force.</p>
+      </div>
+      <p>I set the angle gains from a damped second-order target (a chosen natural frequency and damping ratio) instead of pure trial and error, then refined them in simulation. The derivative term in each loop is low-pass filtered (&tau;<sub>d</sub> = 0.02 s, about an <strong>8 Hz</strong> cutoff) so sensor noise is not amplified by differentiation.</p>
+      <figure class="robot-hero">
+        <img src="assets/pendulum/fig2-block-diagram.png" alt="Block diagram of the closed-loop feedback system: reference minus sensor feedback forms an error that drives a PD controller, whose proportional and derivative terms sum into the process input">
+        <figcaption>Closed-loop architecture: the PD controller acts on the angle error, its output feeding the plant.</figcaption>
+      </figure>
+
+      <h3>Simulation</h3>
+      <p>Before touching hardware I built a <strong>Python</strong> simulation of the nonlinear plant and controller (SciPy <code>solve_ivp</code> at a 5 ms step, the same rate as the rig). Sweeping the starting angle from <strong>&minus;15° to +15°</strong>, every case recovers to upright with no rail contact and re-centers within <strong>3 to 4 s</strong>.</p>
+      <figure class="robot-hero">
+        <a href="assets/pendulum/fig9-results.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/pendulum/fig9-results.png" alt="Simulation plots of pendulum angle and cart position versus time for starting angles from minus 15 to plus 15 degrees, all converging to zero">
+        </a>
+        <figcaption>Simulated angle (top) and cart position (bottom) for a &minus;15° to +15° sweep, all recovering to upright. Click to open full size.</figcaption>
+      </figure>
+
+      <h3>From simulation to hardware</h3>
+      <p>On the rig the same PD law runs at a fixed <strong>200 Hz</strong>. The one genuine difference from simulation: the sim commands a <em>force</em>, but the stepper takes a <em>velocity</em>, so that force is integrated into a commanded velocity and converted to STEP/DIR pulses. Because of that, the hardware gains were re-tuned on the bench from small values, using the simulation gains only as a reference.</p>
+
+      <h3>Mechanical design</h3>
+      <p>The rig was designed in <strong>Fusion 360</strong> and built from <strong>3D-printed PLA</strong> custom parts (platform, bearing slider and housing, pendulum stick, T-slot holders, spacers) plus off-the-shelf bearings, a D-shaft, and a <strong>NEMA 17</strong> stepper. The cart rides a <strong>0.54 m</strong> T-slot rail on a GT2 belt and pulley, and the pendulum pivots in a single vertical plane.</p>
+      <figure class="robot-hero">
+        <img src="assets/pendulum/fig5-cad-render.png" alt="Fusion 360 render of the full cart-pole master assembly: a horizontal T-slot rail with the cart and pendulum arm, a stepper motor at one end, and end brackets">
+        <figcaption>Fusion 360 master-assembly render.</figcaption>
+      </figure>
+      <figure class="robot-hero">
+        <a href="assets/pendulum/fig6-exploded.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/pendulum/fig6-exploded.png" alt="Exploded view of the master assembly showing the stepper, bearings, D-shaft, pendulum pivot, and printed brackets separated along assembly axes">
+        </a>
+        <figcaption>Exploded view of the assembly. Click to open full size.</figcaption>
+      </figure>
+
+      <h3>Electronics</h3>
+      <p>An <strong>Arduino Uno</strong> reads the <strong>P3022</strong> rotary angle sensor and drives the stepper through a <strong>DRV8825</strong>. Logic runs on USB 5 V while the motor draws from a separate <strong>12 to 24 V</strong> supply. An RC filter (220 &Omega;, 10 &micro;F, about a <strong>72 Hz</strong> cutoff) cleans the sensor line, and a 100 &micro;F capacitor smooths the motor supply against inductive spikes.</p>
+      <figure class="robot-hero">
+        <a href="assets/pendulum/fig7-schematic.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/pendulum/fig7-schematic.png" alt="KiCad schematic wiring the Arduino Uno to the DRV8825 stepper driver and the P3022 sensor, with the RC sensor filter and the motor-supply smoothing capacitor">
+        </a>
+        <figcaption>KiCad schematic: Arduino Uno, DRV8825 driver, P3022 sensor, and the filtering. Click to open full size.</figcaption>
+      </figure>
+
+      <h3>Mechanical challenges</h3>
+      <p>Most of the difficulty was alignment and repeatability, not the parts. Because cart position is dead-reckoned from the stepper step count, any belt slack or missed step corrupts the estimate directly, so belt and bearing fit mattered as much as gain tuning. Several print iterations dialed in the PLA tolerances around the bearings and D-shaft, and printed drill guides kept hole placement repeatable.</p>
+      <figure class="robot-hero">
+        <img src="assets/pendulum/fig10-cart-fit.jpg" alt="Close-up photo of the green 3D-printed cart seated on the T-slot rail, showing the bearing and rail fit">
+        <figcaption>Cart bearings and T-slot fit, the main thing to get right for the cart to roll freely.</figcaption>
+      </figure>
+      <div class="photo-row">
+        <figure>
+          <img src="assets/pendulum/fig10-dshaft.jpg" alt="Four numbered green 3D-printed pendulum-stick pieces showing the D-shaft hole tightening from a loose to a tight fit across print iterations">
+          <figcaption>Pendulum-stick D-shaft hole across print iterations, tuning from a loose to a tight fit.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/pendulum/fig10-drill-guide.jpg" alt="A green 3D-printed drill guide clipped over an edge with a marker, used to mark precise drilling points">
+          <figcaption>A printed drill guide that marks precise, repeatable hole locations.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Results</h3>
+      <ul class="detail-list">
+        <li>Settles to within <strong>±0.5°</strong> of upright in <strong>≈0.7 s</strong> and re-centers to within <strong>±1 cm</strong> in <strong>≈1.4 s</strong>.</li>
+        <li>Recovers from starting tilts of <strong>±7°</strong> on hardware (<strong>±15°</strong> in simulation); the gap traces to the 10-bit ADC resolution, the velocity-command stepper versus a continuous force, and unmodeled belt and bearing friction.</li>
+        <li>Runs a fixed <strong>200 Hz</strong> control loop with the cart force held inside <strong>±60 N</strong> throughout.</li>
+        <li>Overshoot and cart excursion match simulation (<strong>60 to 65%</strong> of the start angle, <strong>2.5 to 4.7 cm</strong>), staying well inside the rail's ±21.4 cm half-travel.</li>
+      </ul>
+
+      <div class="actions" style="display:flex; flex-wrap:wrap; gap:12px; margin-top:8px;">
+        <a class="btn btn--ghost" href="assets/pendulum/Single-IP-Project-Report.pdf" target="_blank" rel="noopener noreferrer">Project report (PDF)</a>
+        <a class="btn btn--ghost" href="https://github.com/endotakeru/Single_Inverted_Pendulum/tree/main" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container reveal on-scroll">© 2026 Takeru Endo · <a href="mailto:tendo2@illinois.edu">tendo2@illinois.edu</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

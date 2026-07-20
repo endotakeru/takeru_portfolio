@@ -1,0 +1,1244 @@
+/* =========================================================================
+   Portfolio Template — recreated layout, design system & animations
+   Light theme, Apple-inspired. Fonts: SF Pro / Inter (system-first stack).
+   No build step, no framework — plain HTML/CSS/JS.
+   ========================================================================= */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #fbfbfd;            /* page canvas (Apple off-white) */
+  --surface: #ffffff;       /* cards / raised areas   */
+  --surface-alt: rgba(255, 255, 255, 0.72); /* frosted nav */
+  --text: #1d1d1f;          /* primary text (Apple ink) */
+  --text-strong: #1d1d1f;   /* headings               */
+  --muted: #86868b;         /* secondary text (Apple gray) */
+  --border: #d2d2d7;        /* hairline borders       */
+  --border-dashed: #e8e8ed; /* light divider          */
+  --placeholder: #f5f5f7;   /* image placeholder fill */
+  --accent: #1d3a63;        /* navy highlight         */
+  --accent-hover: #16304f;  /* darker navy (hover)    */
+
+  --maxw: 1000px;
+  --gutter: 22px;
+  --radius: 12px;
+  --radius-lg: 18px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* spring-ish easing used by the original appear effects */
+  --ease-spring: cubic-bezier(0.22, 1.18, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  /* only horizontal padding, so a container element's own vertical
+     padding (e.g. <main>'s padding-top) is preserved */
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* =========================================================================
+   Navigation — centred pill bar with dashed border & animated underline.
+   Slides down from above on load (spring).
+   ========================================================================= */
+.site-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  background-color: var(--surface-alt);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 980px;
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.12);
+
+  /* entrance: hidden above the viewport */
+  opacity: 0.001;
+  transform: translateX(-50%) translateY(-120px);
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.5s var(--ease-spring);
+}
+
+body.is-loaded .site-nav {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-link {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link .label {
+  position: relative;
+  display: inline-block;
+}
+
+/* animated underline */
+.nav-link .underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background-color: var(--accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s var(--ease-out);
+}
+
+.nav-link:hover .underline {
+  transform: scaleX(1);
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.nav-link[aria-current="page"] .underline {
+  transform: scaleX(1);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--accent);
+}
+
+/* =========================================================================
+   Generic reveal utilities
+   ========================================================================= */
+.reveal {
+  opacity: 0.001;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: var(--delay, 0s);
+}
+
+/* on-load reveals (above the fold) */
+body.is-loaded .reveal.on-load,
+/* scroll reveals (below the fold) */
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================================
+   Layout shell
+   ========================================================================= */
+main {
+  padding-top: 140px; /* clears the fixed nav */
+  padding-bottom: 80px;
+}
+
+section {
+  margin-bottom: 88px;
+}
+
+/* =========================================================================
+   Hero
+   ========================================================================= */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--placeholder);
+  border: 3px solid var(--surface);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 10px 28px -16px rgba(29, 58, 99, 0.45);
+  margin-bottom: 28px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero h1 {
+  margin: 0 0 22px;
+  max-width: 18ch;
+  font-size: clamp(40px, 6vw, 60px);
+  line-height: 1.07;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-strong);
+}
+
+/* per-word blur-in animation for the heading */
+.hero h1 .word {
+  display: inline-block;
+  opacity: 0.001;
+  filter: blur(6px);
+  transform: translateY(8px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    filter 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.07s);
+}
+
+body.is-loaded .hero h1 .word {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.hero .bio {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.hero .bio p {
+  margin: 0 0 14px;
+}
+
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* =========================================================================
+   Buttons
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 980px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid var(--accent);
+  background-color: var(--accent);
+  color: #ffffff;
+  transition:
+    background-color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--text-strong);
+  border-color: var(--border);
+}
+
+.btn--ghost:hover {
+  background-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* =========================================================================
+   Section heading
+   ========================================================================= */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-head .count {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* =========================================================================
+   Project type filter — pill buttons mirroring the hero's ghost buttons
+   ========================================================================= */
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.filter-btn {
+  font-family: inherit;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 980px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--text-strong);
+  border: 1px solid var(--border);
+  transition:
+    background-color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn.is-active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* =========================================================================
+   Projects grid
+   ========================================================================= */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* hidden by the type filter */
+.project-card.is-hidden {
+  display: none;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px -28px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent);
+}
+
+.project-thumb {
+  aspect-ratio: 7 / 6;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--placeholder);
+  margin-bottom: 14px;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.4);
+  transform: scale(1.001);
+  transition: filter 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+.project-card:hover .project-thumb img {
+  filter: grayscale(0);
+  transform: scale(1.04);
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 4px 8px;
+}
+
+.project-meta .title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+}
+
+.project-meta .type {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* empty-state hint (shown when no project cards are present) */
+.projects-empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* =========================================================================
+   About page — experience / leadership cards
+   ========================================================================= */
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry .org {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.entry .role {
+  color: var(--text);
+}
+
+.entry .place,
+.entry .dates {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.entry .dates {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.entry .place {
+  grid-column: 1;
+}
+
+/* bullet descriptions under an entry (experience / education detail) */
+.entry .desc {
+  grid-column: 1 / -1;
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.entry .desc li {
+  margin-bottom: 6px;
+}
+
+.entry .desc li::marker {
+  color: var(--accent);
+}
+
+/* tech-stack chips inside a project entry (reuses .chip styling) */
+.entry .stack {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* =========================================================================
+   Skills — category label + chip cluster, matching the entry-list rhythm
+   ========================================================================= */
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.skill-group {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px 24px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-group .cat {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* =========================================================================
+   Project detail page (e.g. vex-robotics.html)
+   ========================================================================= */
+.back-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 28px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.detail-hero {
+  max-width: 64ch;
+  margin: 0 auto 76px;
+  text-align: center;
+}
+
+.detail-hero .eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.detail-hero h1 {
+  margin: 0 0 20px;
+  font-size: clamp(38px, 5.5vw, 56px);
+  line-height: 1.07;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-strong);
+}
+
+.detail-hero .lead {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.detail-hero .lead-sub {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.detail-hero .lead-sub strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* game-rules callout at the top of a season (after the hero) */
+.game-intro {
+  margin: 0 0 22px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background-color: var(--placeholder);
+  border-left: 3px solid var(--accent);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.game-intro p {
+  margin: 0;
+}
+
+.game-intro strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* =========================================================================
+   Snapshot — quick-scan strip (role + headline metrics) under the hero.
+   Built only from the shared tokens, so it reads identically on every
+   project page and keeps the whole site's colour/type in unison.
+   ========================================================================= */
+.snapshot {
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+.snapshot .role {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background-color: var(--placeholder);
+  border-left: 3px solid var(--accent);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.snapshot .role strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.snapshot-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background-color: var(--surface);
+  text-align: center;
+}
+
+.stat .num {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--accent);
+}
+
+.stat .lbl {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.season {
+  max-width: 720px;
+  margin: 0 auto 84px;
+}
+
+.season-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding-bottom: 16px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.season-head h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-strong);
+}
+
+.season-head .szn-year {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.season-head .robot-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.media-grid figure {
+  margin: 0;
+}
+
+.media-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: var(--placeholder);
+  display: block;
+}
+
+.media-grid figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.season > p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.detail-list {
+  margin: 14px 0 24px;
+  padding-left: 18px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.detail-list li {
+  margin-bottom: 7px;
+}
+
+.detail-list li::marker {
+  color: var(--accent);
+}
+
+/* =========================================================================
+   Equation block — transcribed formulas from a report, typeset in the
+   system stack. Uses only shared tokens so it matches every other page.
+   ========================================================================= */
+.equation {
+  margin: 14px 0 20px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background-color: var(--placeholder);
+  border-left: 3px solid var(--accent);
+  overflow-x: auto;
+}
+
+.equation .eq {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.equation .eq + .eq {
+  margin-top: 6px;
+}
+
+.equation .eq .lhs {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.equation .eq .num {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.equation .note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  white-space: normal;
+}
+
+.equation var {
+  font-style: italic;
+}
+
+/* full-robot hero image at the top of each season */
+.robot-hero {
+  max-width: 720px;
+  margin: 0 auto 34px;
+}
+
+.robot-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background-color: var(--placeholder);
+  box-shadow: 0 22px 48px -30px rgba(0, 0, 0, 0.3);
+}
+
+.robot-hero figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* self-hosted hero video (silent), styled like .robot-hero */
+.video-embed {
+  max-width: 720px;
+  margin: 0 auto 34px;
+}
+
+.video-embed video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background-color: #000;
+  box-shadow: 0 22px 48px -30px rgba(0, 0, 0, 0.3);
+}
+
+.video-embed figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.video-embed figcaption a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* portrait hero — cap height so it doesn't dominate */
+.robot-hero--tall img {
+  width: auto;
+  max-width: 100%;
+  max-height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.season .lead-in {
+  max-width: 72ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.season h3 {
+  margin: 28px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+}
+
+/* writing prompt — placeholder text to be replaced by real copy */
+.season .placeholder {
+  max-width: 72ch;
+  margin: 8px 0 4px;
+  padding: 10px 0 10px 14px;
+  border-left: 2px dashed var(--border);
+  color: var(--muted);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* small aside under a "Watch" heading */
+.watch-note {
+  max-width: 72ch;
+  margin: 4px 0 16px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  background-color: var(--placeholder);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* video thumbnails linking to YouTube */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 12px 0 26px;
+}
+
+.video-card {
+  display: block;
+}
+
+.video-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: var(--placeholder);
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.video-card:hover .video-thumb img {
+  transform: scale(1.05);
+}
+
+.video-thumb .play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: rgba(29, 58, 99, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s var(--ease-out);
+}
+
+.video-card:hover .video-thumb .play {
+  background-color: var(--accent);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.video-thumb .play::after {
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 10px 0 10px 17px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+}
+
+.video-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.video-card:hover .video-label {
+  color: var(--accent);
+}
+
+.video-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* a pair of photos at natural aspect (no crop) */
+.photo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin: 8px 0 22px;
+}
+
+.photo-row figure {
+  margin: 0;
+}
+
+.photo-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: var(--placeholder);
+}
+
+.photo-row figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* inline video clips (self-hosted mp4) */
+.clip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 8px 0 20px;
+}
+
+.clip {
+  margin: 0 0 22px;
+}
+
+.clip video {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: #000;
+}
+
+.clip figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.clip--portrait {
+  max-width: 300px;
+}
+
+/* an image styled like a video clip */
+.clip img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background-color: var(--placeholder);
+}
+
+/* two portrait clips (image + video) side by side */
+.clip-pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 0 0 22px;
+}
+
+.clip-pair > figure {
+  flex: 0 1 260px;
+  max-width: 260px;
+  margin: 0;
+}
+
+/* hang clip beside its CAD drawings */
+.hang-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+  margin: 6px 0 22px;
+}
+
+.hang-media > figure {
+  margin: 0;
+}
+
+.hang-media .clip--portrait {
+  flex: 0 1 190px;
+  max-width: 190px;
+}
+
+.hang-media .clip--portrait video {
+  width: 100%;
+  height: auto;
+}
+
+.hang-fig--cad {
+  flex: 0 1 390px;
+  max-width: 390px;
+}
+
+.hang-fig--pole {
+  flex: 0 1 90px;
+  max-width: 90px;
+}
+
+.hang-fig img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.hang-fig figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 40px 0 24px;
+}
+
+.site-footer a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 809.98px) {
+  body {
+    font-size: 16px;
+  }
+
+  main {
+    padding-top: 120px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .entry .dates {
+    text-align: left;
+  }
+
+  .skill-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .media-grid,
+  .video-grid,
+  .photo-row,
+  .clip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero .actions {
+    width: 100%;
+  }
+}
+
+/* respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .reveal,
+  .hero h1 .word,
+  .project-thumb img,
+  .btn,
+  .project-card {
+    transition: none !important;
+  }
+
+  .site-nav,
+  .reveal,
+  .hero h1 .word {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+
+  .reveal,
+  .hero h1 .word {
+    transform: none !important;
+  }
+}

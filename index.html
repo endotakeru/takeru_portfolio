@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Takeru Endo · Mechanical Engineer</title>
+  <meta name="description" content="Takeru Endo, a Mechanical Engineering student at the University of Illinois, focused on robotics and control systems.">
+
+  <!-- Font: Inter (SF Pro substitute on non-Apple devices; system SF used on Apple) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== Navigation ===================== -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="nav-link" href="index.html" aria-current="page">
+      <span class="label">Projects<span class="underline"></span></span>
+    </a>
+    <a class="nav-link" href="about.html">
+      <span class="label">About<span class="underline"></span></span>
+    </a>
+    <!-- Contact tab intentionally removed -->
+  </nav>
+
+  <main class="container">
+
+    <!-- ===================== Hero ===================== -->
+    <section class="hero">
+      <div class="avatar reveal on-load" style="--delay: 0s">
+        <!-- Save your photo as avatar.jpg in this folder; until then the placeholder circle shows. -->
+        <img src="avatar.jpg" alt="Takeru Endo" onerror="this.remove()">
+      </div>
+
+      <!-- data-split → JS turns each word into an animated span (blur-in) -->
+      <h1 data-split>Mechanical Engineer turning designs into motion.</h1>
+
+      <div class="bio reveal on-load" style="--delay: 0.45s">
+        <p>Currently a Mechanical Engineering undergraduate at the University of Illinois at Urbana-Champaign, in the Grainger College of Engineering.</p>
+        <p>My work ranges from competition robotics to systems-level design, and from CAD models to built, tested hardware.</p>
+      </div>
+
+      <div class="actions reveal on-load" style="--delay: 0.6s">
+        <a class="btn" href="https://www.linkedin.com/in/takeru-endo-2a0743313/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn--ghost" href="https://github.com/endotakeru" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn btn--ghost" href="mailto:tendo2@illinois.edu">tendo2@illinois.edu</a>
+      </div>
+    </section>
+
+    <!-- ===================== Projects ===================== -->
+    <section class="projects" aria-labelledby="projects-heading">
+      <div class="section-head reveal on-scroll">
+        <h2 id="projects-heading">Projects</h2>
+        <span class="count">06</span>
+      </div>
+
+      <!-- Filter by project type — pill buttons that mimic the hero's ghost buttons. -->
+      <div class="project-filters reveal on-scroll" role="group" aria-label="Filter projects by type">
+        <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="Class">Class</button>
+        <button type="button" class="filter-btn" data-filter="Club">Club</button>
+        <button type="button" class="filter-btn" data-filter="Personal">Personal</button>
+      </div>
+
+      <!--
+        Project grid. Each card carries a data-type, used by the filter above.
+        Drop a thumbnail into .project-thumb when you have one for a project.
+      -->
+      <div class="projects-grid">
+
+        <a class="project-card reveal on-scroll" href="#" data-type="Personal" style="--delay: 0s">
+          <div class="project-thumb"></div>
+          <div class="project-meta">
+            <span class="title">A.R.G.O</span>
+            <span class="type">Personal / Summer 2026</span>
+          </div>
+        </a>
+
+        <a class="project-card reveal on-scroll" href="#" data-type="Personal" style="--delay: 0.06s">
+          <div class="project-thumb"></div>
+          <div class="project-meta">
+            <span class="title">Robotic Leg Structural Design</span>
+            <span class="type">Personal / Summer 2026</span>
+          </div>
+        </a>
+
+        <a class="project-card reveal on-scroll" href="single-inverted-pendulum.html" data-type="Personal" style="--delay: 0.12s">
+          <div class="project-thumb">
+            <img src="assets/pendulum/fig5-cad-render-card.png" alt="Fusion 360 CAD render of the cart-pole single inverted pendulum rig">
+          </div>
+          <div class="project-meta">
+            <span class="title">Single Inverted Pendulum</span>
+            <span class="type">Personal / Summer 2026</span>
+          </div>
+        </a>
+
+        <a class="project-card reveal on-scroll" href="hulc-tidal.html" data-type="Club" style="--delay: 0.18s">
+          <div class="project-thumb">
+            <img src="assets/hulc/fig3-capillary-model.png" alt="CAD model of the TIDAL capillary action collar">
+          </div>
+          <div class="project-meta">
+            <span class="title">HuLC T.I.D.A.L</span>
+            <span class="type">Club / 2025–2026</span>
+          </div>
+        </a>
+
+        <a class="project-card reveal on-scroll" href="me170.html" data-type="Class" style="--delay: 0.24s">
+          <div class="project-thumb">
+            <img src="assets/me170/hero-render.png" alt="CAD render of the bed desk with privacy hood raised">
+          </div>
+          <div class="project-meta">
+            <span class="title">ME 170: Bed Desk with Privacy Hood</span>
+            <span class="type">Class / Fall 2025</span>
+          </div>
+        </a>
+
+        <a class="project-card reveal on-scroll" href="vex-robotics.html" data-type="Club" style="--delay: 0.3s">
+          <div class="project-thumb">
+            <img src="assets/vex3/card-hero.jpg" alt="8889X High Stakes robot in the snow at night">
+          </div>
+          <div class="project-meta">
+            <span class="title">VEX Robotics</span>
+            <span class="type">Club / 2021–2025</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container reveal on-scroll">© 2026 Takeru Endo · <a href="mailto:tendo2@illinois.edu">tendo2@illinois.edu</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

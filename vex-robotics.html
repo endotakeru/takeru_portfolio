@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VEX Robotics · Takeru Endo</title>
+  <meta name="description" content="Takeru Endo's VEX V5RC robots: 8889X (High Stakes 2024-2025) and 871X (Over Under 2023-2024).">
+
+  <!-- Font: Inter (SF Pro substitute on non-Apple devices; system SF used on Apple) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== Navigation ===================== -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="nav-link" href="index.html" aria-current="page">
+      <span class="label">Projects<span class="underline"></span></span>
+    </a>
+    <a class="nav-link" href="about.html">
+      <span class="label">About<span class="underline"></span></span>
+    </a>
+  </nav>
+
+  <main class="container">
+
+    <a class="back-link reveal on-load" href="index.html" style="--delay: 0s">← Projects</a>
+
+    <!-- ===================== Detail hero ===================== -->
+    <header class="detail-hero reveal on-load" style="--delay: 0.08s">
+      <span class="eyebrow">Club / 2021–2025</span>
+      <h1>VEX Robotics</h1>
+      <p class="lead">Four seasons of competitive VEX V5RC robotics as lead mechanical engineer and captain. Ten robots designed, fabricated, and tuned by hand; below are the two most prominent builds, focused on the hardware: the mechanisms, the problems we hit, and how we solved them.</p>
+      <p class="lead-sub">VEX V5RC is a student competition with a new game each season, played as <strong>head-to-head matches</strong> (autonomous + driver control) and <strong>Robot Skills</strong> (a 60-second solo run). Every robot starts each match inside an <strong>18" × 18" × 18"</strong> cube and lives within an <strong>88 W</strong> motor-power limit, which puts a premium on light, efficient, reliable mechanisms.</p>
+    </header>
+
+    <!-- ===================== Snapshot ===================== -->
+    <section class="snapshot reveal on-load" style="--delay: 0.12s" aria-label="Project snapshot">
+      <p class="role"><strong>My role:</strong> Lead mechanical engineer and team captain across four V5RC seasons: <strong>10 robots</strong> designed, fabricated, and tuned by hand (hardware, not programming). The two builds below are the standouts.</p>
+      <div class="snapshot-stats">
+        <div class="stat"><span class="num">10 robots</span><span class="lbl">Built across 4 competitive seasons</span></div>
+        <div class="stat"><span class="num">Create Award</span><span class="lbl">At the VEX World Championship</span></div>
+        <div class="stat"><span class="num">1st seed</span><span class="lbl">Worlds division, 10–0 in qualification</span></div>
+        <div class="stat"><span class="num">#1 in state</span><span class="lbl">Driver skills (61 points)</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== High Stakes ===================== -->
+    <section class="season reveal on-scroll">
+      <div class="season-head">
+        <h2>High Stakes <span class="szn-year">· 2024–2025</span></h2>
+        <span class="robot-name">8889X</span>
+      </div>
+
+      <figure class="robot-hero robot-hero--tall">
+        <img src="assets/vex2/card-thumb.jpg" alt="8889X, the High Stakes robot, with its VEX award">
+        <figcaption>8889X with its VEX award.</figcaption>
+      </figure>
+
+      <div class="game-intro">
+        <p><strong>The game (High Stakes):</strong> alliances score rings on stakes and climb the ladder. A ring on a stake is worth <strong>1 point</strong> and a top ring <strong>3 points</strong>, plus a <strong>+6</strong> autonomous bonus. The endgame ladder is tiered A–F (0, 5, 10, 15, 20, up to <strong>25 points</strong>), where a higher climb is often the match decider.</p>
+      </div>
+
+      <h3>Overview</h3>
+      <p>My last VEX robot, and it distilled four seasons into two priorities: simplicity and reliability. Rather than chasing every mechanism, it focused on the core job (intaking rings and scoring them on the stakes) and on being effortless to drive, "a second body to the driver" when matches got rough. It still climbed for the endgame, but the real edge was doing the fundamentals flawlessly, every match.</p>
+
+      <h3>Design &amp; build</h3>
+      <p>Scope was kept deliberately narrow: intake rings, score them on the stakes, make it easy to drive. Four mechanisms carried the robot: an over-center locking clamp for the mobile goal, a passive spring-up hang, a ring-holding arm, and a foldable auto-aligner, each chosen to be light, dependable, and driver-friendly.</p>
+      <div class="media-grid">
+        <figure>
+          <img src="assets/vex3/hs-cad.jpg" alt="CAD render of the High Stakes robot">
+          <figcaption>CAD of the robot.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/vex3/sol3.jpg" alt="The ring-holding arm mechanism">
+          <figcaption>The ring arm.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Challenges &amp; solutions</h3>
+      <ul class="detail-list">
+        <li><strong>A clamp that never unclamps or gets stolen.</strong> An over-center locking clamp modeled on household locking pliers. It never released under opponent pressure: <strong>zero goals stolen from us all season</strong>, and we stole goals off non-locking clamps <strong>about five times</strong>.</li>
+        <li><strong>A very light, easy hang.</strong> A passive hang that springs up when the arm lifts, locking in the bottom endgame tier every time. It kept the robot to just <strong>13–14 lbs</strong> vs the typical <strong>16–17</strong>, about <strong>4 lbs</strong> saved, freeing a faster drive ratio to out-run opponents.</li>
+        <li><strong>Holding a second ring while the arm is up.</strong> The single chained intake motor locks when a ring reaches the top, so the arm itself had to hold that ring. Solution: thickness-tuned sticky mats inside the arm let the driver carry <strong>two rings at once</strong>, saving <strong>~2–3 seconds per cycle</strong>.</li>
+        <li><strong>Lining up on the goals without blocking the arm.</strong> A foldable plastic auto-aligner drops down so the arm can reach full rotation to stack goals. Light but durable, it snapped the robot into position on the tall stakes, saving <strong>~5 seconds</strong> per score.</li>
+      </ul>
+
+      <h3>Mechanisms in action</h3>
+      <div class="clip-grid">
+        <figure class="clip">
+          <video controls preload="none" poster="assets/vex2/hs-rings.jpg"><source src="assets/vex2/hs-rings.mp4" type="video/mp4"></video>
+          <figcaption>Holding ring in the air with arm.</figcaption>
+        </figure>
+        <figure class="clip">
+          <video controls preload="none" poster="assets/vex2/hs-aligner.jpg"><source src="assets/vex2/hs-aligner.mp4" type="video/mp4"></video>
+          <figcaption>Auto-aligner.</figcaption>
+        </figure>
+      </div>
+      <div class="clip-pair">
+        <figure class="clip">
+          <img src="assets/vex3/sol1.jpg" alt="The over-center locking clamp">
+          <figcaption>Locking clamp.</figcaption>
+        </figure>
+        <figure class="clip">
+          <video controls preload="none" poster="assets/vex2/hs-hang.jpg"><source src="assets/vex2/hs-hang.mp4" type="video/mp4"></video>
+          <figcaption>Passive hang.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Results</h3>
+      <ul class="detail-list">
+        <li>Earned the <strong>Create Award</strong> at the World Championship.</li>
+        <li>Took <strong>1st seed</strong> and reached the <strong>semifinals</strong> at the Worlds divisional level, going <strong>10–0</strong> in qualification before the elimination rounds.</li>
+        <li>Needing <strong>no major fixes</strong> all event, the team could put its energy into strategy, scouting, and alliance synergy instead of repairs.</li>
+      </ul>
+
+      <h3>Watch</h3>
+      <div class="video-grid">
+        <a class="video-card" href="https://www.youtube.com/watch?v=eIFxs0wY89c" target="_blank" rel="noopener noreferrer">
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/eIFxs0wY89c/hqdefault.jpg" alt="8889X High Stakes Worlds 2025 reveal"><span class="play"></span></span>
+          <span class="video-label">Worlds 2025 Reveal</span>
+        </a>
+        <a class="video-card" href="https://www.youtube.com/watch?v=geNjgQ8BBmA" target="_blank" rel="noopener noreferrer">
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/geNjgQ8BBmA/hqdefault.jpg" alt="8889X 62-point driver skills run"><span class="play"></span></span>
+          <span class="video-label">62-Point Driver Skills</span>
+          <span class="video-sub">At States we scored <strong>61</strong> in driver skills, the <strong>highest driver-skills score in the state</strong>.</span>
+        </a>
+      </div>
+
+      <a class="btn btn--ghost" href="notebooks/8889X-High-Stakes-Notebook.pdf" target="_blank" rel="noopener noreferrer">Engineering notebook (PDF)</a>
+    </section>
+
+    <!-- ===================== Over Under ===================== -->
+    <section class="season reveal on-scroll">
+      <div class="season-head">
+        <h2>Over Under <span class="szn-year">· 2023–2024</span></h2>
+        <span class="robot-name">871X</span>
+      </div>
+
+      <figure class="robot-hero">
+        <img src="assets/vex/ou-hero.jpg" alt="871X Over Under robot">
+        <figcaption>871X's Over Under robot. The slapper + platform mechanism swaps between skills and match play.</figcaption>
+      </figure>
+
+      <div class="game-intro">
+        <p><strong>The game (Over Under):</strong> alliances score triballs and race for elevation. A triball in a goal is worth <strong>5 points</strong> and in a zone <strong>2 points</strong>, plus a <strong>+6</strong> autonomous bonus. At the buzzer each robot's elevation is ranked into tiers A–F (0, 5, 10, 15, 20, up to <strong>~25–30 points</strong> at the top), which can strongly swing the final score.</p>
+      </div>
+      <figure class="robot-hero">
+        <img src="assets/vex/ou-field.jpg" alt="Over Under field with triballs and goals">
+        <figcaption>The Over Under field. Triballs to score clumped up near the goal after being slapped across.</figcaption>
+      </figure>
+
+      <h3>Overview</h3>
+      <p>871X's Over Under robot was built to compete in both formats at once, which reward very different things. Skills favored sending triballs across the field fast; matches didn't, since anything launched over just got stolen, so elevation mattered far more, and a high D-tier hang was rare in our region and worth big points. The answer was a modular robot: a slapper (catapult) tuned for skills that detaches and swaps with a side-pole hang for matches, plus a guided platform for hand-loading triballs.</p>
+
+      <h3>Design &amp; build</h3>
+      <p>The two front-end configurations swap in <strong>under 1–2 minutes</strong>, and deliberately share geometry to make that swap fast.</p>
+      <p><strong>Slapper (skills):</strong> two motors (<strong>22 W</strong>) at <strong>3:1</strong> for speed while keeping enough torque to clump triballs tightly around the goal; a soft rubber end dampens each hit for a consistent landing spot. In the match config the front intake motor comes off.</p>
+      <p><strong>Hang (matches):</strong> geared <strong>7:1</strong> to balance lift speed against the strength to raise the robot; it hangs in <strong>under 10 seconds</strong>. Instead of heavy pneumatics, it latches the side pole with a passive lock and alignment guide, stiffened with shaped steel rods and spacers packed inside the C-channels to stop the bars bending.</p>
+      <p><strong>Loading:</strong> a curved platform with two rubber "squats" funnels each triball to the center for consistent, repeatable hand-loading.</p>
+      <div class="photo-row">
+        <figure>
+          <img src="assets/vex/ou-side.jpg" alt="Side view of the 871X Over Under robot">
+          <figcaption>Side profile of the robot and drivetrain with hang mechanism attached.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/vex/ou-companion.jpg" alt="The 871X robot beside a swappable front-end mechanism">
+          <figcaption>The robot with a swappable mechanism.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Challenges &amp; solutions</h3>
+      <ul class="detail-list">
+        <li><strong>Competing in both skills and matches with one robot.</strong> The two formats reward opposite things. Solution: a modular robot whose slapper detaches and swaps with the hang mechanism between matches.</li>
+        <li><strong>Latching the hang onto the side pole without adding weight.</strong> No room for heavy pneumatics or extra motors. Solution: a passive locking latch with alignment, reinforced with shaped steel rods and C-channel spacers.</li>
+        <li><strong>Loading triballs consistently by hand.</strong> Solution: a curved platform with two rubber bumps that guide each ball to the center.</li>
+      </ul>
+
+      <h3>The loading platform: before &amp; after</h3>
+      <p>The curved platform shaved <strong>about 10 seconds</strong> off hand-loading triballs while the clump stayed about the same. Left: before the platform; right: after.</p>
+      <div class="clip-grid">
+        <figure class="clip">
+          <video controls preload="none" poster="assets/vex/ou-run1.jpg"><source src="assets/vex/ou-run1.mp4" type="video/mp4"></video>
+          <figcaption>Before the curved platform.</figcaption>
+        </figure>
+        <figure class="clip">
+          <video controls preload="none" poster="assets/vex/ou-run2.jpg"><source src="assets/vex/ou-run2.mp4" type="video/mp4"></video>
+          <figcaption>After the curved platform.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Results</h3>
+      <ul class="detail-list">
+        <li>Swapped the front-end mechanism in <strong>under 1–2 minutes</strong> between matches.</li>
+        <li>The hang reached <strong>D-tier</strong> and held the robot's full weight; the driver could align and lift in <strong>under 10 seconds</strong>, an edge in close matches.</li>
+        <li>In skills, the slapper sent <strong>40–50 triballs</strong> across the field with good accuracy near the net in <strong>25–30 seconds</strong>, leaving the driver plenty of time to score them.</li>
+        <li>The loading platform shaved <strong>about 10 seconds</strong> off ball transfer while keeping the clump relatively the same.</li>
+        <li>Reached the <strong>semifinals</strong> at States, enough to qualify for the World Championship, and ranked <strong>top 10 in skills out of 100 teams</strong>.</li>
+      </ul>
+
+      <h3>The hang</h3>
+      <p>The passive side-pole latch reaching a <strong>D-tier</strong> hang and holding the robot's full weight.</p>
+      <div class="hang-media">
+        <figure class="clip clip--portrait">
+          <video controls preload="none" poster="assets/vex/ou-launch.jpg"><source src="assets/vex/ou-launch.mp4" type="video/mp4"></video>
+          <figcaption>Hanging to D-tier on the pole.</figcaption>
+        </figure>
+        <figure class="hang-fig hang-fig--cad">
+          <img src="assets/vex/hang-cad.png" alt="CAD of the pole the robot hung onto, with a triball game piece for scale" onerror="this.closest('figure').style.display='none'">
+          <figcaption>The pole the robot hung onto, with a triball for scale (CAD).</figcaption>
+        </figure>
+        <figure class="hang-fig hang-fig--pole">
+          <img src="assets/vex/hang-tiers.png" alt="Elevation pole with A–J tier heights" onerror="this.closest('figure').style.display='none'">
+          <figcaption>Elevation tiers on the pole.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Watch</h3>
+      <p class="watch-note">Heads up: these reveals feature other robots I built that season, not the robot above, but they're still a cool watch.</p>
+      <div class="video-grid">
+        <a class="video-card" href="https://www.youtube.com/watch?v=FNMSYsB8pCE" target="_blank" rel="noopener noreferrer">
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/FNMSYsB8pCE/hqdefault.jpg" alt="871X SOAR New Year's reveal"><span class="play"></span></span>
+          <span class="video-label">New Year's Reveal</span>
+        </a>
+        <a class="video-card" href="https://www.youtube.com/watch?v=XwVY4D7H2fU" target="_blank" rel="noopener noreferrer">
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/XwVY4D7H2fU/hqdefault.jpg" alt="871X SOAR Worlds reveal"><span class="play"></span></span>
+          <span class="video-label">Worlds Reveal</span>
+        </a>
+      </div>
+
+      <a class="btn btn--ghost" href="notebooks/871X-Over-Under-Notebook.pdf" target="_blank" rel="noopener noreferrer">Engineering notebook (PDF)</a>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container reveal on-scroll">© 2026 Takeru Endo · <a href="mailto:tendo2@illinois.edu">tendo2@illinois.edu</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

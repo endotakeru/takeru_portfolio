@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ME 170: Bed Desk with Privacy Hood · Takeru Endo</title>
+  <meta name="description" content="ME 170 design project at UIUC: a bed desk with a foldable privacy hood. CAD, GD&T part drawings, tolerance analysis, and cost-driven manufacturing decisions.">
+
+  <!-- Font: Inter (SF Pro substitute on non-Apple devices; system SF used on Apple) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== Navigation ===================== -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="nav-link" href="index.html" aria-current="page">
+      <span class="label">Projects<span class="underline"></span></span>
+    </a>
+    <a class="nav-link" href="about.html">
+      <span class="label">About<span class="underline"></span></span>
+    </a>
+  </nav>
+
+  <main class="container">
+
+    <a class="back-link reveal on-load" href="index.html" style="--delay: 0s">← Projects</a>
+
+    <!-- ===================== Detail hero ===================== -->
+    <header class="detail-hero reveal on-load" style="--delay: 0.08s">
+      <span class="eyebrow">Class / Fall 2025</span>
+      <h1>ME 170: Bed Desk with Privacy Hood</h1>
+      <p class="lead">A semester ME 170 design project at the University of Illinois: a bed desk with a foldable privacy hood so a student can work at night without shining light on a sleeping roommate. The team ran the full cycle from user interviews to a production-ready package of CAD, engineering drawings, tolerance analysis, and a costed bill of materials.</p>
+      <p class="lead-sub">This page is the engineering side: <strong>CAD, GD&amp;T part drawings, tolerance and fit analysis, and cost-driven manufacturing decisions.</strong></p>
+    </header>
+
+    <!-- ===================== Snapshot ===================== -->
+    <section class="snapshot reveal on-load" style="--delay: 0.12s" aria-label="Project snapshot">
+      <p class="role"><strong>My role:</strong> On a three-person team (AB6-3), I designed the recessed <strong>LED light assembly</strong> (the diffuser, casing, and clip lid) and produced its CAD, GD&amp;T part drawings, tolerance and fit analysis, and cost-driven manufacturing choices.</p>
+      <div class="snapshot-stats">
+        <div class="stat"><span class="num">$46.35</span><span class="lbl">Selling price, under the $60 target</span></div>
+        <div class="stat"><span class="num">&minus;33%</span><span class="lbl">Part cost cut via DFM (Mexico vs Germany)</span></div>
+        <div class="stat"><span class="num">2 fits</span><span class="lbl">Tolerance analyses: clearance + rigid</span></div>
+        <div class="stat"><span class="num">ASME Y14.5M</span><span class="lbl">Full GD&amp;T drawing package</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== Hero image ===================== -->
+    <figure class="robot-hero reveal on-load" style="--delay: 0.16s">
+      <img src="assets/me170/hero-render.png" alt="CAD render of the bed desk with the black foldable privacy hood raised, built-in LED lights, air vents, cup holders, and folding legs">
+      <figcaption>The final design: a folding bed desk with a fan-folding privacy hood, two recessed LED lights, laptop air vents, cup holders, and folding steel legs.</figcaption>
+    </figure>
+
+    <!-- ===================== Content ===================== -->
+    <section class="season reveal on-scroll">
+      <div class="season-head">
+        <h2>Engineering the desk <span class="szn-year">· ME 170</span></h2>
+        <span class="robot-name">Team AB6-3</span>
+      </div>
+
+      <div class="game-intro">
+        <p><strong>The brief:</strong> interviews pointed to a common dorm problem, a roommate working late keeping the other awake, with light the biggest disturbance. The product spec set hard targets: MSRP <strong>≤ $60/unit</strong>, at least a <strong>70%</strong> cut in external light, setup under <strong>10 seconds</strong>, a footprint inside a Twin XL bed (<strong>≤ 39" × 16"</strong>), and about <strong>10 lb</strong> or less.</p>
+      </div>
+
+      <h3>The product</h3>
+      <p>The desk sits over the bed on folding steel legs. Its defining feature is a fan-folding privacy hood that blocks light from the work area. Two LED lights recess into the surface to light the work without spilling outward, a hole grid acts as passive laptop air vents, and the surface carries cup holders. Hood and legs fold flat, collapsing to a packed <strong>39" × 6" × 16"</strong>.</p>
+
+      <h3>CAD model</h3>
+      <p>Modeled as a full CAD assembly that drove every downstream deliverable: the exploded views, drawings, tolerance stack, and cost estimate. The hood is stacked folding panels that collapse toward the desk; the legs bend from a single steel tube.</p>
+      <div class="photo-row">
+        <figure>
+          <img src="assets/me170/cad-parts.png" alt="CAD view of the desk with its major parts laid out: desk board, cup holder rings, two folding legs, and the hood frame rod">
+          <figcaption>Major components from the CAD assembly: desk board, cup-holder rings, folding legs, and hood frame.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/me170/cad-side-profile.png" alt="Side profile of the desk showing the fan-folding privacy hood fully raised">
+          <figcaption>Side profile with the privacy hood fully fanned out over the work area.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Exploded assembly and bill of materials</h3>
+      <p>The full assembly breaks into seven called-out items: the wooden desk base, two leg assemblies, two LED assemblies, two hood pegs, and the hood frame. Each sub-assembly was drawn on its own, and every part fed a costed bill of materials. Costing the BOM in aPriori returned a fully burdened part cost of <strong>$15.45</strong>/unit on about <strong>$89,300</strong> in tooling investment, landing a computed selling price of <strong>$46.35</strong>, comfortably under the $60 target.</p>
+      <figure class="robot-hero">
+        <a href="assets/me170/exploded-full.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/me170/exploded-full.png" alt="Exploded assembly drawing of the full desk with a numbered parts list">
+        </a>
+        <figcaption>Full-assembly exploded drawing with the parts list. Click to open full size.</figcaption>
+      </figure>
+      <figure class="robot-hero">
+        <a href="assets/me170/bom-table.png" target="_blank" rel="noopener noreferrer">
+          <img src="assets/me170/bom-table.png" alt="Bill of materials table listing each part, quantity, part cost, total part cost, and investment cost, with totals and selling price">
+        </a>
+        <figcaption>Bill of materials with per-part cost, tooling investment, and the totals used to set the selling price. Click to open full size.</figcaption>
+      </figure>
+
+      <h3>Engineering drawings and GD&amp;T</h3>
+      <p>Every custom part was documented to <strong>ASME Y14.5M-2018</strong> in third-angle projection with a standard title and tolerance block. The drawings carry material callouts, section and detail views, and hole and fit callouts, matched to how each part would be made: <strong>powder-coated steel</strong> legs, <strong>ABS</strong> injection-molded plastics, <strong>rubber</strong> feet, and a <strong>plexiglass</strong> diffuser.</p>
+      <div class="photo-row">
+        <figure>
+          <a href="assets/me170/dwg-legs.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-legs.png" alt="Detailed engineering drawing of the steel legs with dimensions, radii, and a cross-section detail view">
+          </a>
+          <figcaption>Steel legs: bend radii, dimensions, and a tube cross-section detail. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/dwg-desk.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-desk.png" alt="Detailed engineering drawing of the wooden desk base with hole patterns and overall dimensions">
+          </a>
+          <figcaption>Desk base: the air-vent hole grid, cup-holder bores, and footprint. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/dwg-hood-frame.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-hood-frame.png" alt="Detailed engineering drawing of the hood frame with detail views and slot callouts">
+          </a>
+          <figcaption>Hood frame: bend radii with slot and hole callouts in detail views. Click to open full size.</figcaption>
+        </figure>
+      </div>
+
+      <h3>The LED light assembly (my drawings)</h3>
+      <p>The recessed LED lights were the parts I detailed: a plexiglass diffuser (LED top), an ABS casing (LED bottom) housing two AAA batteries with a circuit board and switch, and a clip lid closing the battery compartment. I drew each with section views to show wall thicknesses and the snap and clip features.</p>
+      <div class="photo-row">
+        <figure>
+          <a href="assets/me170/dwg-led-bottom.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-led-bottom.png" alt="Detailed engineering drawing of the LED light bottom casing with diameters and a section view">
+          </a>
+          <figcaption>LED light bottom (ABS casing): stepped diameters and a 1:2 section view. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/dwg-led-top.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-led-top.png" alt="Detailed engineering drawing of the plexiglass LED light top diffuser">
+          </a>
+          <figcaption>LED light top (plexiglass diffuser): Ø100 disc, 2 mm thick. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/dwg-clip-lid.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/dwg-clip-lid.png" alt="Detailed engineering drawing of the battery clip lid with a section view">
+          </a>
+          <figcaption>Clip lid (battery cover): clip geometry in a 1:1 section view. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/led-assembly-sections.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/led-assembly-sections.png" alt="LED assembly drawing with two cross-section views">
+          </a>
+          <figcaption>LED assembly section views showing how the parts stack and seat. Click to open full size.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Tolerance analysis</h3>
+      <p>Two fits were analyzed in detail, each chosen to match the part's job and how it is made.</p>
+      <ul class="detail-list">
+        <li><strong>Hood peg into hood-frame slot (rotating/sliding fit).</strong> The user swings and sets the hood by hand, so it needs a loose clearance fit. A Ø3.5 h11 peg in a Ø3.5 C11 slot gives a <strong>0.07 mm</strong> allowance and up to <strong>0.22 mm</strong> clearance. Both features sit at <strong>IT grade 11</strong> on purpose, loose enough to injection-mold like the other plastics, which keeps cost down.</li>
+        <li><strong>LED assembly into the desk (rigid axial fit).</strong> The goal is a flush LED top. The fit uses a <strong>0 mm</strong> allowance with the window shifted negative (about <strong>−0.15 mm</strong>) so that, if not perfectly flush, the light sits slightly <em>below</em> the surface rather than proud into the workspace. The wider tolerance went to the wooden desk, since the molded LED flange holds tighter than processed wood.</li>
+      </ul>
+      <div class="photo-row">
+        <figure>
+          <a href="assets/me170/tol-peg-slot.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/tol-peg-slot.png" alt="Tolerance callout figure for the peg and slot: slot Ø3.5 C11 and peg Ø3.5 h11 with tolerance values">
+          </a>
+          <figcaption>Peg-and-slot fit: Ø3.5 C11 slot over a Ø3.5 h11 peg. Click to open full size.</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/me170/tol-led-desk.png" target="_blank" rel="noopener noreferrer">
+            <img src="assets/me170/tol-led-desk.png" alt="Tolerance callout figure for the LED flange and desk with tolerance values">
+          </a>
+          <figcaption>LED-flange-to-desk fit, biased so the light finishes flush or just below the surface. Click to open full size.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Cost reduction and manufacturability</h3>
+      <p>The hood frame is one of the largest, most expensive custom parts, so cutting its cost mattered most. In aPriori, the biggest price lever turned out to be country of manufacture: fully burdened part cost ran from <strong>$2.49 (India)</strong> to <strong>$4.07 (Germany)</strong>. We chose <strong>Mexico at $2.74</strong>, near the low end while close to the USA, where most orders ship. Process choices followed the same DFM logic: injection molding for plastics, pipe bending for the steel legs, cut cloth for the hood curtain.</p>
+      <figure class="robot-hero">
+        <img src="assets/me170/cost-vs-country.png" alt="Scatter chart of fully burdened part cost versus country of manufacturing, from India at $2.49 to Germany at $4.07">
+        <figcaption>Fully burdened part cost by country of manufacture, the study behind choosing Mexico.</figcaption>
+      </figure>
+
+      <h3>Results</h3>
+      <ul class="detail-list">
+        <li><strong>$46.35</strong> selling price on a <strong>$15.45</strong> part cost, under the <strong>$60</strong> target and competitive with basic bed desks, while adding the hood, built-in lights, air vents, and cup holders.</li>
+        <li>Choosing Mexico over Germany cut the studied part cost from <strong>$4.07 to $2.74</strong>, about a <strong>33%</strong> reduction.</li>
+        <li>Two documented fits: a clearance fit (allowance <strong>0.07 mm</strong>, clearance <strong>0.22 mm</strong>) for the hood pivot, and a negatively biased rigid fit (about <strong>−0.15 mm</strong>) for a flush LED.</li>
+        <li>A complete <strong>ASME Y14.5M-2018</strong> drawing package for every custom part, sized for about <strong>95,000 units/year</strong>.</li>
+      </ul>
+
+      <a class="btn btn--ghost" href="assets/me170/ME170-Final-Report.pdf" target="_blank" rel="noopener noreferrer">Final report (PDF)</a>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container reveal on-scroll">© 2026 Takeru Endo · <a href="mailto:tendo2@illinois.edu">tendo2@illinois.edu</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

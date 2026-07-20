@@ -12,18 +12,27 @@
     var h1 = document.querySelector(".hero h1[data-split]");
     if (!h1) return;
 
-    var words = h1.textContent.trim().split(/\s+/);
+    // Walk the original child nodes: split text into animatable word spans,
+    // but preserve structural elements like <br> so explicit line breaks stay.
+    var nodes = Array.prototype.slice.call(h1.childNodes);
     h1.textContent = "";
+    var i = 0;
 
-    words.forEach(function (word, i) {
-      var span = document.createElement("span");
-      span.className = "word";
-      span.style.setProperty("--i", i);
-      span.textContent = word;
-      h1.appendChild(span);
-      // keep natural spacing between inline-block words
-      if (i < words.length - 1) {
-        h1.appendChild(document.createTextNode(" "));
+    nodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var words = node.textContent.trim().split(/\s+/).filter(Boolean);
+        words.forEach(function (word) {
+          var span = document.createElement("span");
+          span.className = "word";
+          span.style.setProperty("--i", i++);
+          span.textContent = word;
+          h1.appendChild(span);
+          // keep natural spacing between inline-block words
+          h1.appendChild(document.createTextNode(" "));
+        });
+      } else {
+        // preserve <br> and any other markup as-is
+        h1.appendChild(node.cloneNode(true));
       }
     });
   }

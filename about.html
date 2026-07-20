@@ -64,7 +64,7 @@
           <div class="place">Grainger College of Engineering, Urbana-Champaign, IL</div>
           <ul class="desc">
             <li>Dean's List, all semesters.</li>
-            <li>Relevant coursework: CAD, Linear Algebra with Computational Applications, Intro to Differential Equations.</li>
+            <li>Relevant coursework: Computer-Aided Design, Design for Manufacturability, Statics, Linear Algebra with Computational Applications, Differential Equations.</li>
           </ul>
         </div>
 
@@ -80,25 +80,43 @@
       <div class="entry-list">
 
         <div class="entry reveal on-scroll" style="--delay: 0s">
-          <div class="org">Nonlinear Single Inverted Pendulum Control &amp; Simulation</div>
+          <div class="org">Cart-Pole Single Inverted Pendulum: Controls, Simulation &amp; Embedded Systems</div>
           <div class="dates">May – Jun 2026</div>
           <div class="role">Self-balancing cart-pole control system</div>
           <div class="place">Urbana-Champaign, IL</div>
           <ul class="desc">
-            <li>Fabricated a cart-pole system from an Arduino Uno, NEMA 17 stepper motor, DRV8825 driver, and a magnetic angle sensor.</li>
-            <li>Derived the system's nonlinear equations of motion from classical mechanics.</li>
-            <li>Built a closed-loop simulation in Python using numerical integration and discrete-time control updates.</li>
-            <li>Implemented real-time PID control in embedded C++ with sensor filtering and state estimation, stabilizing the pendulum from initial disturbances of up to 15°.</li>
-            <li>Designed custom KiCad schematics for sensor and motor-driver integration.</li>
+            <li>Derived the cart-pole's nonlinear dynamics with Lagrange's method and linearized them to a state-space model, exposing an unstable +7.19 rad/s right-half-plane pole and setting dual-loop PD gains analytically from a target damping ratio and natural frequency.</li>
+            <li>Implemented a 200 Hz real-time PD controller in C++ on an Arduino Uno, fusing a P3022 angle encoder (10-bit, 6× oversampled) with stepper step-count dead-reckoning to drive a DRV8825 / NEMA 17 actuator, recovering ±7° tilts and settling to ±0.5° in ~0.7 s.</li>
+            <li>Built the rig in Fusion 360 (3D-printed PLA on a 0.540 m aluminum T-slot rail with GT2 belt drive) and a KiCad circuit with a 72.3 Hz RC anti-alias filter sized to the 100 Hz Nyquist limit, then validated it against a SciPy (RK45) nonlinear simulation with ±15° recovery.</li>
           </ul>
           <div class="stack">
             <span class="chip">Fusion 360</span>
             <span class="chip">KiCad</span>
-            <span class="chip">3D Printing</span>
             <span class="chip">Python</span>
             <span class="chip">C++</span>
             <span class="chip">Embedded Systems</span>
             <span class="chip">Control Systems</span>
+            <span class="chip">3D Printing</span>
+          </div>
+        </div>
+
+        <div class="entry reveal on-scroll" style="--delay: 0.06s">
+          <div class="org">Mechanical Design &amp; GD&amp;T Study: Collapsible Desk System (ME 170)</div>
+          <div class="dates">Fall 2025</div>
+          <div class="role">Recessed LED lighting module design &amp; DFM study</div>
+          <div class="place">Urbana-Champaign, IL</div>
+          <ul class="desc">
+            <li>Designed the recessed LED lighting module (housing, Plexiglass diffuser, clip lid) on a 3-person team and drafted its injection-molded and Plexiglass part drawings to ASME Y14.5M-2018 with full GD&amp;T.</li>
+            <li>Performed ISO limit-and-fit tolerance stack-up analysis (IT-11 clearance fits, 0.07 mm allowance; -0.15 mm flush-mount interface) to ensure tool-free folding and injection-molding manufacturability.</li>
+            <li>Ran an aPriori DFM cost study across 7 countries, achieving a $15.45 unit cost against a $60 MSRP target and selecting materials and processes (injection molding, sheet metal, ABS, steel) from a full BOM.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Fusion 360</span>
+            <span class="chip">GD&amp;T (ASME Y14.5M)</span>
+            <span class="chip">Design for Manufacturability</span>
+            <span class="chip">Tolerance Analysis</span>
+            <span class="chip">aPriori</span>
+            <span class="chip">BOM</span>
           </div>
         </div>
 
@@ -115,23 +133,25 @@
 
         <div class="entry reveal on-scroll" style="--delay: 0s">
           <div class="org">Illinois Space Society, NASA Human Lander Challenge</div>
-          <div class="dates">Sep 2025 – May 2026</div>
+          <div class="dates">2025 – 2026</div>
           <div class="role">Undergraduate Mechanical Engineer</div>
           <div class="place">Urbana-Champaign, IL</div>
           <ul class="desc">
-            <li>Contributed to preliminary design reviews and CAD modeling for a lunar cryogenic pipeline leak-detection system on a 10+ member interdisciplinary team.</li>
-            <li>Built CAD- and simulation-driven visualizations of system architecture and fluid/structural behavior, improving the clarity of subsystem integration and mission-concept communication in design reviews.</li>
+            <li>Modeled the full Fusion 360 CAD assembly for a passive capillary-action collar — a split-clamshell cryogenic pipeline junction (housing, flanges, aluminum-mesh capillary ring, sensor and outlet layout) — as one of the primary CAD engineers on a 13-member interdisciplinary team for NASA's national Human Lander Challenge 2026.</li>
+            <li>Cut propellant leak rate in simulation by 41.9% at 10 kPa and passively (0 W) sealed leaks below 7.2 kPa, slowing leak velocity from 4.30 to 2.25 m/s.</li>
+            <li>Produced the leak-capture animation for the proposal video, showing capillary leak isolation at the pipeline junction.</li>
           </ul>
         </div>
 
         <div class="entry reveal on-scroll" style="--delay: 0.06s">
           <div class="org">VEX Robotics (High School), Teams 66659A · 871X · 8889X</div>
-          <div class="dates">2022 – 2025</div>
+          <div class="dates">2021 – 2025</div>
           <div class="role">Lead Robotics Engineer &amp; Team Captain</div>
           <div class="place">Lexington, MA</div>
           <ul class="desc">
-            <li>Led mechanical design, fabrication, and testing of ten competition robots across four high-school seasons; managed CAD development, subsystem integration, and build schedules.</li>
-            <li>Earned divisional first seed and semifinalist at the VEX Robotics World Championship, plus 20+ national and international awards.</li>
+            <li>Captained 2 VEX teams across 4 seasons, directing CAD, subsystem integration, and build scheduling while leading design, fabrication, and testing of 10 robots from concept to competition.</li>
+            <li>Engineered every subsystem of a V5 robot in Onshape (6-wheel 450 RPM drivetrain, two-stage flex-wheel intake, locking mobile-goal clamp, wall-stake scorer, odometry pod) inside an 18-inch, 88 W, 13.2 lb envelope.</li>
+            <li>Earned World Championship divisional first seed and a semifinal finish, plus 20+ regional, national, and international awards including Tournament Champion and Robot Skills Champion.</li>
           </ul>
         </div>
 
@@ -147,37 +167,56 @@
       <div class="skills-list">
 
         <div class="skill-group reveal on-scroll" style="--delay: 0s">
-          <div class="cat">Languages</div>
+          <div class="cat">CAD &amp; Design</div>
           <div class="skill-chips">
-            <span class="chip">Python</span>
-            <span class="chip">Arduino / C++</span>
-            <span class="chip">Java</span>
+            <span class="chip">SOLIDWORKS</span>
+            <span class="chip">Fusion 360</span>
+            <span class="chip">Onshape</span>
+            <span class="chip">GD&amp;T (ASME Y14.5M)</span>
+            <span class="chip">Engineering Drawings</span>
+            <span class="chip">DFM</span>
+            <span class="chip">Tolerance Stack-Up</span>
+            <span class="chip">BOM</span>
           </div>
         </div>
 
         <div class="skill-group reveal on-scroll" style="--delay: 0.06s">
-          <div class="cat">Software &amp; Tools</div>
+          <div class="cat">Modeling &amp; Controls</div>
           <div class="skill-chips">
-            <span class="chip">Onshape</span>
-            <span class="chip">Fusion 360</span>
-            <span class="chip">SOLIDWORKS</span>
-            <span class="chip">KiCad</span>
-            <span class="chip">Git / GitHub</span>
-            <span class="chip">Embedded Systems</span>
-            <span class="chip">3D Printing</span>
-            <span class="chip">Power Tools</span>
-            <span class="chip">Soldering</span>
+            <span class="chip">Python</span>
+            <span class="chip">NumPy</span>
+            <span class="chip">SciPy</span>
+            <span class="chip">Matplotlib</span>
+            <span class="chip">State-Space Modeling</span>
+            <span class="chip">PID / PD Control</span>
+            <span class="chip">Lagrangian Dynamics</span>
+            <span class="chip">Odometry</span>
           </div>
         </div>
 
         <div class="skill-group reveal on-scroll" style="--delay: 0.12s">
-          <div class="cat">Libraries</div>
+          <div class="cat">Programming &amp; Embedded</div>
           <div class="skill-chips">
-            <span class="chip">NumPy</span>
-            <span class="chip">SciPy</span>
-            <span class="chip">Matplotlib</span>
-            <span class="chip">Argparse</span>
-            <span class="chip">Dataclasses</span>
+            <span class="chip">C++</span>
+            <span class="chip">Arduino</span>
+            <span class="chip">Java</span>
+            <span class="chip">Embedded Systems</span>
+            <span class="chip">Real-Time Control</span>
+            <span class="chip">Stepper / Servo Motor Control</span>
+            <span class="chip">Sensor Fusion</span>
+            <span class="chip">KiCad</span>
+            <span class="chip">Git / GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal on-scroll" style="--delay: 0.18s">
+          <div class="cat">Fabrication &amp; Test</div>
+          <div class="skill-chips">
+            <span class="chip">3D Printing (PLA)</span>
+            <span class="chip">Laser Cutting</span>
+            <span class="chip">Soldering</span>
+            <span class="chip">Power Tools</span>
+            <span class="chip">Hardware Bring-Up &amp; Calibration</span>
           </div>
         </div>
 
